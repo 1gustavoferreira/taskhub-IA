@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "frontend:dev": "next dev",
+    "frontend:build": "next build",
+    "frontend:start": "next start",
+    "lint": "eslint",
+    "backend:dev": "nodemon --watch backend -e ts --exec ts-node --project tsconfig.backend.json backend/src/index.ts",
+    "dev": "concurrently -n backend,frontend -c green,blue \"npm run backend:dev\" \"npm run frontend:dev\""
+  }
+}
