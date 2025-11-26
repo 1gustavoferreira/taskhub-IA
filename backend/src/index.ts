@@ -1,8 +1,9 @@
 import { ApolloServer } from "apollo-server";
 import dotenv from "dotenv";
-import { typeDefs } from "./schema";
+import typeDefs from "./schema";
 import { resolvers } from "./resolvers";
-import { connectDB } from "../db/connect";
+import { connectDB } from "./db/connect";
+import { context } from "./context";
 
 dotenv.config();
 
@@ -12,7 +13,11 @@ const MONGO_URI: string = process.env.MONGO_URI || "mongodb://localhost:27017/ta
 async function start() {
   await connectDB(MONGO_URI);
 
-  const server = new ApolloServer({ typeDefs, resolvers });
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context,
+  });
 
   server.listen({ port: PORT }).then(({ url }) => {
     console.log(`🚀 GraphQL server rodando em ${url}`);

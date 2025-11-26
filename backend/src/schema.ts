@@ -1,6 +1,6 @@
 import { gql } from "apollo-server";
 
-export const typeDefs = gql`
+const typeDefs = gql`
   type User {
     id: ID!
     name: String!
@@ -11,13 +11,26 @@ export const typeDefs = gql`
     id: ID!
     title: String!
     description: String
-    user: User
+    status: String!
+    owner: ID!
+  }
+
+  type AuthPayload {
+    token: String!
   }
 
   type Query {
-    users: [User]
-    user(id: ID!): User
-    tasks: [Task]
-    task(id: ID!): Task
+    listTasks: [Task!]!
+    users: [User!]!   # ✅ alinhado com resolvers
+  }
+
+  type Mutation {
+    registerUser(name: String!, email: String!, password: String!): User!
+    loginUser(email: String!, password: String!): AuthPayload!
+    createTask(title: String!, description: String): Task!
+    updateTask(id: ID!, title: String, description: String, status: String): Task
+    deleteTask(id: ID!): Boolean!
   }
 `;
+
+export default typeDefs;
