@@ -20,10 +20,10 @@ async function start() {
   });
 
   server.listen({ port: PORT }).then(({ url }) => {
-    console.log(`🚀 GraphQL server rodando em ${url}`);
+    console.log(`🚀 GraphQL server running at ${url}`);
   });
 }
 
 start().catch((err: unknown) => {
-  console.error("❌ Falha ao iniciar o servidor:", err);
+  console.error("❌ Failed to start server:", err);
 });

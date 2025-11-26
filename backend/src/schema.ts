@@ -21,7 +21,7 @@ const typeDefs = gql`
 
   type Query {
     listTasks: [Task!]!
-    users: [User!]!   # ✅ alinhado com resolvers
+    users: [User!]!
   }
 
   type Mutation {

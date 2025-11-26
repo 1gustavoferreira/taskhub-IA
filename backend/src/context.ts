@@ -8,9 +8,10 @@ export const context = async ({ req }: any) => {
     try {
       const decoded: any = jwt.verify(token, process.env.JWT_SECRET || "secret");
       const user = await User.findById(decoded.userId);
+      if (!user) throw new Error("Invalid token");
       return { user };
     } catch (err) {
-      console.error("Token inválido:", err);
+      throw new Error("Invalid or expired token");
     }
   }
   return {};
